@@ -1,0 +1,242 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+@using gioithieudaihocvinh.Models
+
+@{ 
+    var tuyensinh = ViewBag.tuyensinh;
+    var dambaochatluong = ViewBag.dambaochatluong;
+    var hocbong = ViewBag.hocbong;
+    var nguoihoc = ViewBag.nguoihoc;
+}
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex justify-cntent-center align-items-center">
+    <div id="heroCarousel" class="container carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+        <!-- Slide 1 -->
+       
+
+
+        <div class="carousel-item active">
+            <div class="carousel-container">
+                <h2 style="font-size:30px" class="animate__animated animate__fadeInDown">@dambaochatluong[0].Title</h2>
+                <p class="animate__animated animate__fadeInUp">@dambaochatluong[0].Excerpt</p>
+                <a href="/Home/ChiTiettinTuc/@dambaochatluong[0].Id" class="btn-get-started animate__animated animate__fadeInUp">Xem thêm</a>
+            </div>
+        </div>
+        
+        @foreach (var item in dambaochatluong)
+        {
+            if (item.Id != dambaochatluong[0].Id)
+            {
+
+
+                <div class="carousel-item">
+                    <div class="carousel-container">
+                        <h2 style="font-size:30px" class="animate__animated animate__fadeInDown">@item.Title</h2>
+                        <p class="animate__animated animate__fadeInUp">@item.Excerpt</p>
+                        <a href="/Home/ChiTiettinTuc/@item.Id" class="btn-get-started animate__animated animate__fadeInUp">Xem thêm</a>
+                    </div>
+                </div>
+            }
+            
+        }
+
+
+
+
+        <!-- Slide 2 -->
+        <!--<div class="carousel-item">
+        <div class="carousel-container">
+            <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
+            <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+            <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
+        </div>
+    </div>-->
+        <!-- Slide 3 -->
+        <!--<div class="carousel-item">
+        <div class="carousel-container">
+            <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
+            <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+            <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
+        </div>
+    </div>-->
+
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
+        </a>
+
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
+        </a>
+
+    </div>
+</section><!-- End Hero -->
+
+<main id="main">
+
+    <!-- ======= Services Section ======= -->
+    <section class="services">
+        <div class="container">
+
+            <div class="row">
+                
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
+                        <div class="icon-box icon-box-pink">
+                            <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                            <h4 class="title"><a style="display: block; display: -webkit-box; height: 16px*1.3*3; font-size: 16px; line-height: 1.3; -webkit-line-clamp: 2; /* số dòng hiển thị */ -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-top: 10px;" href="/Home/chitiettintuc/@tuyensinh[0].Id">@tuyensinh[0].Title</a></h4>
+                            <p style="display: block; display: -webkit-box; height: 16px*1.3*3; font-size: 16px; line-height: 1.3; -webkit-line-clamp: 5; /* số dòng hiển thị */ -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-top: 10px; text-align:justify;" class="description">@tuyensinh[0].Excerpt</p>
+                        </div>
+                    </div>
+                
+
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                    <div class="icon-box icon-box-cyan">
+                        <div class="icon"><i class="bx bx-file"></i></div>
+                        <h4 class="title"><a style="display: block; display: -webkit-box; height: 16px*1.3*3; font-size: 16px; line-height: 1.3; -webkit-line-clamp: 2; /* số dòng hiển thị */ -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-top: 10px;"  href="/Home/chitiettintuc/@tuyensinh[1].Id">@tuyensinh[1].Title</a></h4>
+                        <p style="display: block; display: -webkit-box; height: 16px*1.3*3; font-size: 16px; line-height: 1.3; -webkit-line-clamp: 5; /* số dòng hiển thị */ -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-top: 10px; text-align: justify;" class="description">@tuyensinh[1].Excerpt</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                    <div class="icon-box icon-box-green">
+                        <div class="icon"><i class="bx bx-tachometer"></i></div>
+                        <h4 class="title"><a style="display: block; display: -webkit-box; height: 16px*1.3*3; font-size: 16px; line-height: 1.3; -webkit-line-clamp: 2; /* số dòng hiển thị */ -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-top: 10px;" href="/Home/chitiettintuc/@tuyensinh[2].Id">@tuyensinh[2].Title</a></h4>
+                        <p style="display: block; display: -webkit-box; height: 16px*1.3*3; font-size: 16px; line-height: 1.3; -webkit-line-clamp: 5; /* số dòng hiển thị */ -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-top: 10px; text-align: justify;" class="description">@tuyensinh[2].Excerpt</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                    <div class="icon-box icon-box-blue">
+                        <div class="icon"><i class="bx bx-world"></i></div>
+                        <h4 class="title"><a style="display: block; display: -webkit-box; height: 16px*1.3*3; font-size: 16px; line-height: 1.3; -webkit-line-clamp: 2; /* số dòng hiển thị */ -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-top: 10px;" href="/Home/chitiettintuc/@tuyensinh[3].Id">@tuyensinh[3].Title</a></h4>
+                        <p style="display: block; display: -webkit-box; height: 16px*1.3*3; font-size: 16px; line-height: 1.3; -webkit-line-clamp: 5; /* số dòng hiển thị */ -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-top: 10px; text-align: justify;" class="description">@tuyensinh[3].Excerpt</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section><!-- End Services Section -->
+    <!-- ======= Why Us Section ======= -->
+    <section class="why-us section-bg" data-aos="fade-up" date-aos-delay="200">
+        <div class="container">
+
+            <div class="row">
+                <h1  style="border-bottom: 1px solid gray; color: #2079df;">Thông báo tuyển sinh</h1>
+                <div class="col-lg-6 video-box">
+                    <img src="~/public/img/why-us.jpg" class="img-fluid" alt="">
+                    <a href="https://www.youtube.com/watch?v=8Vl2PmrQ_Kg" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
+                </div>
+
+                <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
+
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-fingerprint"></i></div>
+                        <h4 class="title"><a  style="display: block; display: -webkit-box; height: 16px*1.3*3; font-size: 16px; line-height: 1.3; -webkit-line-clamp: 2; /* số dòng hiển thị */ -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-top: 10px;" href="/Home/ChiTietTinTuc/@tuyensinh[0].Id">@tuyensinh[0].Title</a></h4>
+                        <p  style="display: block; display: -webkit-box; height: 16px*1.3*3; font-size: 16px; line-height: 1.3; -webkit-line-clamp: 3; /* số dòng hiển thị */ -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-top: 10px;" class="description">@tuyensinh[0].Excerpt</p>
+                    </div>
+
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-gift"></i></div>
+                        <h4 class="title"><a style="display: block; display: -webkit-box; height: 16px*1.3*3; font-size: 16px; line-height: 1.3; -webkit-line-clamp: 2; /* số dòng hiển thị */ -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-top: 10px;" href="/Home/ChiTietTinTuc/@tuyensinh[1].Id">@tuyensinh[1].Title</a></h4>
+                        <p  style="display: block; display: -webkit-box; height: 16px*1.3*3; font-size: 16px; line-height: 1.3; -webkit-line-clamp: 3; /* số dòng hiển thị */ -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-top: 10px;" class="description">@tuyensinh[1].Excerpt</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Why Us Section -->
+    <!-- ======= Features Section ======= -->
+    <section class="features">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Người học ở đại học Vinh</h2>
+                <p>Đại học Vinh là cơ sở đào tạo đại học đa ngành cung cấp nguồn nhân lực chất lượng cao và thích ứng nhanh với thế giới việc làm...</p>
+            </div>
+
+                <div class="row" data-aos="fade-up">
+                    <div class="col-md-5">
+                        <img style="width:100%;" src="@nguoihoc[0].Thumbnail" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-md-7 pt-4">
+                        <a href="/Home/ChiTietTinTuc/@nguoihoc[0].Id">
+                            <h3 style="color:black">@nguoihoc[0].Title</h3>
+                            <p style="color:gray" class="fst-italic">
+                                @nguoihoc[0].Excerpt
+                            </p>
+                           @* <ul>
+                                <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+                                <li><i class="bi bi-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+                            </ul>*@
+                    </a>
+                        </div>
+                </div>
+            
+
+                <div class="row" data-aos="fade-up">
+                    <div class="col-md-5 order-1 order-md-2">
+                        <img style="width:100%;" src="@nguoihoc[1].Thumbnail" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-md-7 pt-5 order-2 order-md-1">
+                        <a href="/Home/ChiTietTinTuc/@nguoihoc[1].Id">
+                            <h3 style="color: black;">>@nguoihoc[1].Title</h3>
+                            @*<p class="fst-italic">
+
+        </p>*@
+                            <p style="color: gray;">>
+                                @nguoihoc[1].Excerpt
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            
+             
+
+                <div class="row" data-aos="fade-up">
+                    <div class="col-md-5">
+                        <img style="width:100%;" src=" @nguoihoc[2].Thumbnail" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-md-7 pt-5">
+                    <a href="/Home/ChiTietTinTuc/@nguoihoc[2].Id">
+                        <h3 style="color:black"> @nguoihoc[2].Title</h3>
+                        <p style="color:gray"> @nguoihoc[2].Excerpt</p>
+                        @*<ul>
+                            <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+                            <li><i class="bi bi-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+                            <li><i class="bi bi-check"></i> Facilis ut et voluptatem aperiam. Autem soluta ad fugiat.</li>
+                        </ul>*@
+            </a>
+                    </div>
+                </div>
+            
+
+                <div class="row" data-aos="fade-up">
+                    <div class="col-md-5 order-1 order-md-2">
+                        <img style="width:100%;" src=" @nguoihoc[3].Thumbnail" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-md-7 pt-5 order-2 order-md-1">
+                        <a href="/Home/ChiTietTinTuc/@nguoihoc[3].Id">
+                            <h3 style="color: black;"> @nguoihoc[3].Title</h3>
+                            @*<p class="fst-italic">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.
+        </p>*@
+                            <p style="color: gray;">>
+                                @nguoihoc[3].Excerpt
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            
+
+        </div>
+    </section><!-- End Features Section -->
+
+</main>
+    <!-- End #main -->

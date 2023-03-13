@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewBag.Title = "ChiTietTinTuc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using gioithieudaihocvinh.Models;
+@{
+    var ChiTietTinTuc = ViewBag.ChiTietTinTuc;
+    var danhmuc = ViewBag.danhmuc;
+    var danhmuccha = ViewBag.danhmuccha;
+}
+<style>
+    #comments::-webkit-scrollbar {
+        width: 0 !important;
+        display: none;
+    }
+</style>
+<section class="" style="margin-top:80px; padding: 20px 0; z-index:999999; ">
+    <div class="container" style="border-bottom: 1px solid #ced4da; padding: 20px 0; ">
+
+        <div class="d-flex justify-content-between align-items-center">
+            @*<h2>About Us</h2>*@
+            <div style="display:flex;">
+                <div><a style="cursor:pointer; list-style-type:none !important;" href="/Home/">Trang chủ</a></div>/ &nbsp
+                <div>@danhmuccha.Name</div>/ &nbsp
+                <div>@danhmuc.Name</div>/ &nbsp
+                <div>@ChiTietTinTuc.Slug</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section id="blog" class="blog">
+    <div class="container aos-init aos-animate" data-aos="fade-up">
+
+        <div class="row">
+
+            <div class="col-lg-12 entries">
+
+                <article class="entry entry-single">
+
+                    <div class="entry-img row">
+                        <img src="@ChiTietTinTuc.Thumbnail" alt="" class="img-fluid col-lg-12">
+                    </div>
+
+                    <h2 class="entry-title">
+                        @ChiTietTinTuc.Title
+                    </h2>
+
+
+
+                    <div class="entry-content text-justify">
+                         @Html.Raw(@ChiTietTinTuc.Content)
+                    </div>
+
+                </article><!-- End blog entry -->
+
+
+            </div><!-- End blog entries list -->
+
+
+
+        </div>
+
+    </div>
+</section>
+<script>
+    document.getElementById("header").style.background = "#1e4356"
+</script>
+<div id="Questions">
+
+    <section class="" style="margin-top:80px; padding: 20px 0; z-index:999999; ">
+        <div class="container" style="border-bottom: 1px solid #ced4da; padding: 20px 0; ">
+
+            <h1>{{Questions}}&nbsp Questions</h1>
+
+        </div>
+    </section>
+
+    <section class="contact aos-init aos-animate" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="php-email-form" style="height:315px;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="comments" class="col-md-12 overflow-scroll" style="height: 270px; ">
+                                    <div v-for="item in datatb.tableData">
+                                        <div>
+
+                                            <h3 style="width:fit-content; line-height:50px">Câu hỏi : {{item.Title}}</h3>
+                                        </div>
+                                        <p style="text-indent:20px;">
+                                            trả lời :&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp {{item.Answer}}
+                                        </p>
+
+                                    </div>
+                                    @*<i class="bx bx-map"></i>*@
+                                </div>
+                            </div>
+                            
+
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="php-email-form">
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <input type="text" name="name" v-model="titlename" class="form-control" id="name" placeholder="Câu hỏi">
+                                    <span class="mt-4 mb-2 text-danger"
+                                          v-if="dataForm.errors().has('Title')">
+                                        {{ dataForm.errors().get('Title') }}
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group mt-3">
+                                <textarea v-model="dataForm.Content" class="form-control" name="message" rows="5" placeholder="Mô tả"></textarea>
+                                <span class="mt-4 mb-2 text-danger"
+                                      v-if="dataForm.errors().has('Content')">
+                                    {{ dataForm.errors().get('Content') }}
+                                </span>
+                            </div>
+                            <div class="my-3">
+                                <div class="loading">Loading</div>
+                                <div class="error-message"></div>
+                                <div class="sent-message">Your message has been sent. Thank you!</div>
+                            </div>
+                            <div class="text-center"><button @@click="submitform()" type="submit">Send Message</button></div>
+                        </div>
+                    </div>
+
+                </div>
+
+        </div>
+    </section>
+</div>
+<script src="~/public/js/chitiettintuc/chitiettintuc.js"></script>

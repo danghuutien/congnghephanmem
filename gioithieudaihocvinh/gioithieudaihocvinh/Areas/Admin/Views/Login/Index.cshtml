@@ -1,0 +1,203 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="vi" class="">
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Rubick admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Rubick admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="LEFT4CODE">
+
+
+
+    <link href="~/Areas/Admin/public/login/css/tailwind.css" rel="stylesheet" />
+    <!-- BEGIN: CSS Assets-->
+    <link href="~/Areas/Admin/public/css/app.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/public/login/css/app.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/public/login/css/app1.css" rel="stylesheet" />
+
+    <link href="~/Areas/Admin/public/images/logo.png" rel="icon">
+    <link href="~/Areas/Admin/public/images/logo.png" rel="apple-touch-icon">
+    <link rel="manifest" href="./images/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <title>Trường Đại Học Vinh</title>
+    <!-- Link mở file upload -->
+    <!-- END: CSS Assets-->
+
+</head>
+<!-- END: Head -->
+
+<body class="login" style="padding: 0px;">
+    <style>
+        .background-login {
+            background-image: url("/Areas/Admin/public/login/images/9_giai_phong_mat_bang.jpg");
+            background-size: cover;
+            background-repeat: round;
+        }
+    </style>
+
+
+    <div class="min-h-screen flex justify-center items-center background-login">
+
+        <div class="py-12 px-12 bg-white rounded-2xl shadow-xl z-20">
+            <div>
+                <h1 style="font-family: Roboto;" class="text-3xl font-bold text-center mb-4 cursor-pointer" >LOGIN</h1>
+
+            </div>
+            <div class="space-y-4" style="min-width:320px;">
+                <form id="login-form">
+                    <input onkeyup="gmailChange()" id="Gmail" type="text" class="intro-x login__input form-control py-3 px-4 border-gray-300 block"
+                           placeholder="Tên đăng nhập">
+                    <div id="error-name" class="login__input-error w-5/6 text-theme-6 mt-2"></div>
+                    <input onkeyup="passwordChange()" id="password" type="password"
+                           class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
+                           placeholder="Mật khẩu">
+                    <div id="error-password" class="login__input-error w-5/6 text-theme-6 mt-2"></div>
+
+                    <div id="error" class="login__input-error w-5/6 text-theme-6 mt-2"></div>
+
+                    <div class="text-center mt-6">
+                        <button style="outline:none;" id="btn-login" class="py-3 w-64 text-xl text-white bg-purple-400 rounded-2xl relative"><i id="load" class="el-icon-loading text-lg absolute" style="z-index:1; color:black; left:45%;"></i> ĐĂNG NHẬP</button>
+
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <!--
+            <script src="./stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js.download"></script>-->
+
+
+    <script id="rendered-js"></script>
+
+
+
+
+    <!-- BEGIN: Dark Mode Switcher-->
+    <!-- END: Dark Mode Switcher-->
+    <!-- BEGIN: JS Assets-->
+    <!-- END: JS Assets-->
+    @*  <script src="~/Areas/Admin/public/login/js/app.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    @*<script src="~/Areas/Admin/public/js/app.js"></script>*@
+    <script>
+        document.getElementById("load").style.display = 'none'
+
+        const gmailChange = () => {
+            console.log(1111)
+            document.getElementById('error-name').innerText = ''
+        }
+
+        const passwordChange = () => {
+            console.log(1111)
+            document.getElementById('error-password').innerText = ''
+        }
+        document.getElementById('password').onchange = () => {
+        }
+        document.getElementById('login-form').onsubmit = (e) => {
+            e.preventDefault();
+            const Gmail = document.getElementById('Gmail').value;
+            const password = document.getElementById('password').value;
+
+
+
+            if (Gmail != "") {
+                if (password != "") {
+                    document.getElementById("load").style.display = 'block'
+                    axios.post('/Admin/Login/Check',
+                        {
+                            Gmail, password
+                        }
+                    )
+                        .then(res => {
+                            document.getElementById("load").style.display = 'none'
+                            if (res.data.status) {
+                                location.href = '/Admin/HomeAdmin/Index'
+
+                            } else {
+                                document.getElementById('error').innerText = 'Tên đăng nhập hoặc mật khẩu không đúng'
+                            }
+                        })
+                } else {
+
+                    document.getElementById('error-password').innerText = 'Trường này không được để trống'
+                }
+            } else {
+                if (password == "") {
+                    document.getElementById('error-password').innerText = 'Trường này không được để trống'
+                }
+                document.getElementById('error-name').innerText = 'Trường này không được để trống'
+
+            }
+        }
+    </script>
+
+    @*<script>
+            cash(function () {
+                async function login() {
+                    // Reset state
+                    cash('#login-form').find('.login__input').removeClass('border-theme-6')
+                    cash('#login-form').find('.login__input-error').html('')
+
+                    // Post form
+                    let name = cash('#Gmail').val()
+                    let password = cash('#password').val()
+                    let rememberMe = cash('#remember-me').val()
+
+                    // Loading state
+                    cash('#btn-login').html(
+                        '<i data-loading-icon="oval" data-color="white" class="w-5 h-5 mx-auto"></i>').svgLoader()
+
+
+                    axios.post('/Admin/Login/Edit', {
+                        Gmail: Gmail,
+                        password: password,
+                        remember_me: rememberMe
+                    }).then(res => {
+                        if (res.status) {
+                            location.href = '/Admin/Menu/Index'
+                        } else {
+                            location.href = '/Admin/Login/Index'
+                        }
+                    }).catch(err => {
+                        cash('#btn-login').html('Login')
+                        if (err.response.data.message != 'Tên đăng nhập hoặc mật khẩu sai') {
+                            for (const [key, val] of Object.entries(err.response.data.errors)) {
+                                cash(`#${key}`).addClass('border-theme-6')
+                                cash(`#error-${key}`).html(val)
+                            }
+                        } else {
+                            cash(`#password`).addClass('border-theme-6')
+                            cash(`#error-password`).html(err.response.data.message)
+                        }
+                    })
+                }
+
+
+
+                cash('#login-form').on('keyup', function (e) {
+                    if (e.keyCode === 13) {
+                        login()
+                    }
+                })
+
+                cash('#btn-login').on('click', function () {
+                    login()
+                })
+            })
+        </script>*@
+</body>
+
+</html>

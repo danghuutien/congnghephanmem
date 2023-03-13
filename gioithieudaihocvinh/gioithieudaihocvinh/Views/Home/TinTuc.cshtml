@@ -1,0 +1,195 @@
+﻿@using gioithieudaihocvinh.Models
+
+@{
+    var TinTuc = ViewBag.TinTuc;
+    var danhmuc = ViewBag.danhmuc;
+    var danhmuccha = ViewBag.danhmuccha;
+    var background = ViewBag.background;
+    var count = ViewBag.count;
+    var recordsTotal = ViewBag.recordsTotal;
+    var page = ViewBag.page;
+    var id = ViewBag.id;
+    var Previous = page - 1;
+    var Next = page + 1;
+
+}
+@{
+    ViewBag.Title = "TinTuc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #comments::-webkit-scrollbar {
+        width: 0 !important;
+        display: none;
+    }
+</style>
+
+<section class="" style="margin-top:80px; padding: 20px 0; z-index:999999; ">
+    <div class="container" style="border-bottom: 1px solid #ced4da; padding: 20px 0; ">
+
+        <div class="d-flex justify-content-between align-items-center">
+            @*<h2>About Us</h2>*@
+            <div style="display:flex;">
+                <div><a style="cursor:pointer; list-style-type:none !important;" href="/Home/">Trang chủ</a></div>/ &nbsp
+                <div>@danhmuccha.Name</div>/ &nbsp
+                <div>@danhmuc.Name</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="about aos-init aos-animate" data-aos="fade-up" style="padding:0;">
+    <div class="container">
+
+
+        <div class="row" style="justify-content:space-between">
+            @foreach (var item in TinTuc)
+            {
+                <div class="row col-lg-6 mt-5">
+                    <a class="row" href="/Home/ChiTietTinTuc/@item.Id">
+
+                        <div class="col-lg-5">
+                            @*<img src="assets/img/about.jpg" class="img-fluid" alt="">*@
+                            <img style="width:100%; height:100%" src="@item.Thumbnail" class="img-fluid" />
+                        </div>
+                        <div class="col-lg-7 pt-4 pt-lg-0">
+                            <h6 style="display: block; display: -webkit-box; height: 16px*1.3*3; font-size: 16px; line-height: 1.3; -webkit-line-clamp: 2; /* số dòng hiển thị */ -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-top: 10px;" class="">@item.Title</h6>
+                            <p class="fst-italic text-black" style="text-align:justify;display: block; display: -webkit-box; height: 16px*1.3*3; font-size: 16px; line-height: 1.3; -webkit-line-clamp: 3; /* số dòng hiển thị */ -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-top: 10px;">
+                                @item.Excerpt
+                            </p>
+
+                        </div>
+                    </a>
+                </div>
+
+            }
+        </div>
+        
+        @if (count > 8)
+        {
+            <nav aria-label="Page navigation example" style="margin: 0 auto; display:block; width:fit-content;">
+                <ul class="pagination" style="margin-top: 30px;">
+                    @if (page <= 1)
+                    {
+                        <li class="page-item"><a class="page-link" href="/Home/TinTuc/@id?page=@recordsTotal">Previous</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" href="/Home/TinTuc/@id?page=@Previous">Previous</a></li>
+                    }
+                    @for (var i = 1; i <= recordsTotal; i++)
+                    {
+                        <li class="page-item"><a class="page-link" href="/Home/TinTuc/@id?page=@i">@i</a></li>
+                    }
+
+                    @*<li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>*@
+                    @if (page >= recordsTotal)
+                    {
+
+
+
+                        <li class="page-item"><a class="page-link" href="/Home/TinTuc/@id?page=1">Next</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" href="/Home/TinTuc/@id?page=@Next">Next</a></li>
+
+                    }
+                </ul>
+            </nav>
+
+        }
+
+
+    </div>
+</section>
+
+
+<div id="demo">
+
+    <section class="" style="margin-top:80px; padding: 20px 0; z-index:999999; ">
+        <div class="container" style="border-bottom: 1px solid #ced4da; padding: 20px 0; ">
+
+            <h1>{{comment}}&nbsp Comments</h1>
+
+        </div>
+    </section>
+     
+    <section  class="contact aos-init aos-animate" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="php-email-form" style="height:375px;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="comments" class="" style="height:300px; overflow:scroll;">
+                                    <div v-for="item in datatb.tableData">
+                                        <div class="row">
+                                            <img src="~/public/img/tải xuống.jpg" style="border-radius:100%; width:70px; height: 50px;" />
+                                            <h3 style="width:fit-content; line-height:50px; text-transform:capitalize;">{{item.Created_by}}</h3>
+                                        </div>
+                                        <p style="text-indent:20px;">
+                                            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp {{item.Content}}
+                                        </p>
+
+                                    </div>
+                                    @*<i class="bx bx-map"></i>*@
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="php-email-form">
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <input type="text" name="name" v-model="dataForm.Created_by" class="form-control" id="name" placeholder="Người tạo">
+                                    <span class="mt-4 mb-2 text-danger"
+                                          v-if="dataForm.errors().has('Created_by')">
+                                        {{ dataForm.errors().get('Created_by') }}
+                                    </span>
+                                </div>
+
+                            </div>
+                            <div class="form-group mt-3">
+                                <input v-model="dataForm.Thumbnail" v-on:change="handleFile" type="file" class="form-control" name="subject" id="files" ref="files" placeholder="Subject">
+                                <span class="mt-4 mb-2 text-danger"
+                                      v-if="dataForm.errors().has('Thumbnail')">
+                                    {{ dataForm.errors().get('Thumbnail') }}
+                                </span>
+                            </div>
+                            <div class="form-group mt-3">
+                                <textarea v-model="dataForm.Content" class="form-control" name="message" rows="5" placeholder="Nội dung"></textarea>
+                                <span class="mt-4 mb-2 text-danger"
+                                      v-if="dataForm.errors().has('Content')">
+                                    {{ dataForm.errors().get('Content') }}
+                                </span>
+                            </div>
+                            <div class="my-3">
+                                <div class="loading">Loading</div>
+                                <div class="error-message"></div>
+                                <div class="sent-message">Your message has been sent. Thank you!</div>
+                            </div>
+                            <div class="text-center"><button @@click="submitform()" type="submit">Send Message</button></div>
+                        </div>
+                    </div>
+
+                </div>
+
+        </div>
+    </section>
+</div>
+
+<script>
+    document.getElementById("header").style.background = "#1e4356"
+</script>
+<script src="~/public/js/TinTuc/TinTuc.js"></script>

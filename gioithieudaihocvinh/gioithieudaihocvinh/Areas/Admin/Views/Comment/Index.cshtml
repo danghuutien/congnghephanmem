@@ -1,0 +1,219 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="demo" class="py-6  h-full ">
+    <style>
+        #demo {
+            font-family: "Roboto,sans-serif";
+        }
+    </style>
+    <div v-cloak v-bind:class="{ hidden: isActivemodal }" style="z-index: 100"
+         class="min-w-screen h-screen animated fadeIn faster
+         fixed  left-0 top-0 flex justify-center items-center inset-0 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
+        <div @@click="closemodal()" class="absolute bg-black opacity-80 inset-0 z-0"></div>
+        <div class="sm:w-6/12 w-10/12  p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white">
+            <div class=" w-full  overflow-auto ">
+
+                <div class=" flex justify-between items-center  rounded-t border-b mb-5 dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white uppercase">
+                        Danh mục
+                    </h3>
+                    <button type="button" @@click="closemodal()"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            data-modal-toggle="defaultModal">
+                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+
+
+
+                <div class="mt-5 md:col-span-12 md:mt-0">
+                    <div class="shadow sm:overflow-hidden sm:rounded-md grid grid-cols-12 ">
+                        <div class="sm:col-span-6 col-span-12  bg-white px-4 py-5 sm:p-4">
+                            <label class="block text-sm font-medium text-gray-700">Người tạo</label>
+                            <input v-model="dataForm.Created_by" name="Title" type="text" required
+                                   class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            <span class="mt-4 mb-2 text-red-500" v-if="dataForm.errors().has('Created_by')">
+                                {{ dataForm.errors().get('Created_by') }}
+                            </span>
+                        </div>
+                        <div class="sm:col-span-6 col-span-12  bg-white px-4 py-5 sm:p-4">
+                            <label class="block text-sm font-medium text-gray-700">Hình ảnh</label>
+                            <input v-on:change="handleFile" multiple name="Thumbnail" type="file"
+                                   class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            <span class="mt-4 mb-2 text-red-500"
+                                  v-if="dataForm.errors().has('Thumbnail')">
+                                {{ dataForm.errors().get('Thumbnail') }}
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="mt-5 md:col-span-12 md:mt-0">
+                    <div class="shadow sm:overflow-hidden sm:rounded-md grid grid-cols-12 ">
+                        
+                        <div class="sm:col-span-12 col-span-12  bg-white px-4 py-5 sm:p-4">
+                            <label for="Phone" class="block text-sm font-medium text-gray-700">Người tạo</label>
+                            <input v-model="dataForm.Phone" name="Title" id="Phone" type="text" required
+                                   class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            <span class="mt-4 mb-2 text-red-500" v-if="dataForm.errors().has('Phone')">
+                                @@{{ dataForm.errors().get('Phone') }}
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="mt-5 md:col-span-12 md:mt-0">
+                    <div class="shadow sm:overflow-hidden sm:rounded-md grid grid-cols-12 ">
+                        <div class="sm:col-span-12 col-span-12  bg-white px-4 py-5 sm:p-4">
+                            <label class="block text-sm font-medium text-gray-700">Mô tả ngắn</label>
+
+                            <textarea v-model="dataForm.Excerpt" name="Excerpt" rows="5" required
+                                      class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+
+                            </textarea>
+
+
+                            <span class="mt-4 mb-2 text-red-500" v-if="dataForm.errors().has('Excerpt')">
+                                {{ dataForm.errors().get('Excerpt') }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="mt-5 md:col-span-12 md:mt-0">
+                    <div class="shadow sm:overflow-hidden sm:rounded-md grid grid-cols-12 ">
+                        <div class="sm:col-span-12 col-span-12  bg-white px-4 py-5 sm:p-4">
+                            <label class="block text-sm font-medium text-gray-700">Nội dung</label>
+                            <textarea v-model="dataForm.Content" name="test" rows="10"
+                                      class=" block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+
+                            </textarea>
+
+
+
+
+
+
+                            <span class="mt-4 mb-2 text-red-500" v-if="dataForm.errors().has('Content')">
+                                {{ dataForm.errors().get('Content') }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!--footer-->
+            <div class=" text-center  md:block pt-4">
+                <button @@click="submitform()"
+                        class="inline-flex mr-2 items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Danh mục
+                </button>
+                <button @@click="closemodal()"
+                        class="inline-flex items-center px-4 py-2 border border-red-700   text-sm font-medium rounded-md shadow-sm text-red-700 bg-white hover:text-white hover:bg-red-700 ">
+                    Hủy
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 flex">
+        <h1 class="text-base sm:text-2xl font-semibold text-gray-900 dark:text-light">Quản lý comments </h1>
+        @*<h1 class="text-base sm:text-xl mt-1 text-gray-900 dark:text-light">&nbsp; Phòng ban</h1>*@
+    </div>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 ">
+        <!-- Replace with your content -->
+        <div class="py-4 datatable">
+            <div class=" rounded-lg border-4 border-dashed border-gray-200 bg-white" style="min-height:80vh ;">
+                <div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8 mt-6">
+                    <template>
+                        <div id="app" class="col-12">
+                            <div class="row p-4">
+                                <div class="py-4">
+                                    <div class="sm:flex sm:justify-between">
+                                        <div class="sm:flex justify-between">
+                                            @*<button @@click="saveform()" type="button"
+                            class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
+                        Thêm
+                        mới
+                    </button>*@
+
+                                        </div>
+                                        <div class="col-3 col-span-3">
+                                            <input @@keyup="onChange($event)" type="text" placeholder="Tìm kiếm" class="effect-7">
+                                            <span class="focus-border">
+                                                <i></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Using the VdtnetTable component -->
+                                <datatable :datatb="datatb" namePaging="pagination" @@pagination="pagination">
+                                    <template>
+                                        <el-table-column label="STT" width="100" align="center">
+                                            <template slot-scope="scope">
+                                                <span style="margin-left: 10px">{{ scope.$index + 1 }}</span>
+                                            </template>
+                                        </el-table-column>
+                                        <el-table-column prop="Created_by" label="Người tạo">
+                                        </el-table-column>
+                                        @*<el-table-column prop="Thumbnail" label="Hình ảnh">
+                                        </el-table-column>*@
+                                        <el-table-column prop="Content" label="Nội dung">
+                                        </el-table-column>
+                                       @* <el-table-column prop="Phone" label="Số điện thoại">
+                                        </el-table-column>*@
+
+
+
+                                        <el-table-column align="center" width="270">
+                                            <template slot="header" slot-scope="scope">
+                                                Chức năng
+                                            </template>
+                                            <template slot-scope="scope">
+                                                
+                                                <el-tooltip class="item" effect="dark" content="Xóa"
+                                                            placement="top-start">
+                                                    <el-button size="mini" @@click="doAlertDelete(scope.row)">
+                                                        <i class="el-icon-delete text-lg"></i>
+                                                    </el-button>
+                                                </el-tooltip>
+
+
+
+                                            </template>
+                                        </el-table-column>
+
+                                    </template>
+                                    <!--End Colum -->
+                                </datatable>
+                                
+                                <!--End Colum -->
+
+                            </div>
+                        </div>
+                    </template>
+
+                </div>
+            </div>
+        </div>
+        <!-- /End replace -->
+    </div>
+</div>
+
+<script src="~/Areas/Admin/public/js/comment/comment.js"></script>
